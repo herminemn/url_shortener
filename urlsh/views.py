@@ -12,8 +12,16 @@ from .models import Url
 """
 
 
+def home_view_fbv(request, *args, **kwargs):
+    if request.method == "POST":
+        return render(request, "urlsh/home.html", {})
+
+
 class HomeView(View):
     def get(self, request, *args, **kwargs):
+        return render(request, "urlsh/home.html", {})
+
+    def post(self, request, *args, **kwargs):
         return render(request, "urlsh/home.html", {})
 
 
