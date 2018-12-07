@@ -55,9 +55,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'url_shortener.urls'
-# ROOT_HOSTCONF = 'url_shortener.hosts'
+ROOT_HOSTCONF = 'url_shortener.hosts'
 # DEFAULT_HOST = 'www'
 # DEFAULT_REDIRECT_URL = "http://www.aga.com"
+PARENT_HOST = "127.0.0.1:8000"
 
 TEMPLATES = [
     {
