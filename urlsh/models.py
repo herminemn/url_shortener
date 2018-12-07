@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 
 from .utils import code_generator, create_shortcode
-
+from .validators import validate_url
 
 SHORTCODE_MAX = getattr(settings, "SHORTCODE_MAX", 15)
 
@@ -27,10 +27,10 @@ class UrlManager(models.Manager):
 
 
 class Url(models.Model):
-    link = models.CharField(max_length=300)
-    shortcode = models.CharField(max_length=SHORTCODE_MAX, unique=True, blank=True)
-    updated = models.DateTimeField(auto_now=True)
-    timestamp = models.DateTimeField(auto_now_add=True)
+    link = models.CharField(max_length=300, validators=[validate_url], null=True)
+    shortcode = models.CharField(max_length=SHORTCODE_MAX, unique=True, blank=True, null=True)
+    updated = models.DateTimeField(auto_now=True, null=True)
+    timestamp = models.DateTimeField(auto_now_add=True, null=True)
     active = models.BooleanField(default=True)
     objects = UrlManager()
 

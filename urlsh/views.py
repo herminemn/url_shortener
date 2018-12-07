@@ -2,7 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 
-
+from .forms import SubmitUrlForm
 from .models import Url
 
 
@@ -19,10 +19,32 @@ def home_view_fbv(request, *args, **kwargs):
 
 class HomeView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, "urlsh/home.html", {})
+        the_form = SubmitUrlForm()
+        context = {
+            "title": "Want to Shorten URL?",
+            "form": the_form
+        }
+        return render(request, "urlsh/home.html", context)
 
     def post(self, request, *args, **kwargs):
-        return render(request, "urlsh/home.html", {})
+        form = SubmitUrlForm(request.POST)
+        context = {
+            "title": "Want to Shorten URL?",
+            "form": form
+        }
+        template = "urlsh/home.html"
+        if form.is_valid():
+            new_url = form.cleaned_data.get("link")
+            obj, created = Url.objects.get_or_create(link=new_url)
+            context = {
+                "object": obj,
+                "created": created
+            }
+            if created:
+                template = "urlsh/success.html"
+            else:
+                template = "urlsh/already_exists.html"
+        return render(request, template, context)
 
 
 class KirrCBView(View):
