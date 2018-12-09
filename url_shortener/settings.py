@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'urlsh',
     # 'django_hosts',
+    'url_data',
 ]
 
 MIDDLEWARE = [
