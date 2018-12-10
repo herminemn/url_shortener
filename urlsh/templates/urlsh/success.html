@@ -1,5 +1,16 @@
-<div style="width: 1000px; margin: 0 auto;">
-    <h1>Created</h1>
-    <p>{{ object.link }}</p>
-    <p><a href="{{ object.get_short_url }}">{{ object.get_short_url }}</a></p>
+{% extends "base.html" %}
+
+{% block title %}
+{{ object.shortcode }}
+{% endblock title %}
+
+{% block content %}
+<div class="text-center col-sm-13">
+    <div class="well">
+    <h3>Short URL Successfully Created</h3>
+    </div>
+    <!--<p>{{ object.link }}</p>-->
+    <p>{{ object.get_short_url }}</a></p>
+    <a class="btn btn-primary" href="/">New</a>
 </div>
+{% endblock content %}
